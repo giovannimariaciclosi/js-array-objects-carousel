@@ -47,3 +47,90 @@ const images = [
 ]
 
 console.log(images);
+
+
+// - preparare gli elementi in js corrispondenti agli elementi html
+const upArrowElement = document.getElementById("up-arrow");
+const downArrowElement = document.getElementById("down-arrow");
+const activeImgElement = document.getElementById("carousel-active-img");
+const carouselThumbnailsElement = document.getElementById("carousel-thumbnails");
+
+
+// - memorizzare una variabile di indice
+let index = 0;
+
+// inizio inserendo dentro il parametro src la proprietà image degli oggetti
+activeImgElement.src = images[index].image;
+
+
+images.forEach((immagineAttuale, indiceAttuale) => {
+
+  let newThumbnail = document.createElement('img');
+
+  // appendo le immagini a #carousel-thumbnails
+  carouselThumbnailsElement.append(newThumbnail);
+
+  // cambio il parametro src in modo che contenga il path dell'immagine relativa
+  newThumbnail.src = immagineAttuale.image;
+
+  // aggiungo la classe thumbnail
+  newThumbnail.classList.add("thumbnail");
+
+  // aggiungo l'attributo alt
+  newThumbnail.alt = "thumbnail picture";
+
+  // attribuire lo stile in maniera dinamica
+  //stilizzo l'altezza di ciascuna con la formula calc(100% / numero immagini)
+  newThumbnail.style.height = `calc(100% / ${images.length})`;
+});
+
+
+
+
+// prendo le immagini create dal documento usando il selettore con la classe che gli ho appena aggiunto
+const thumbnailElements = document.querySelectorAll("#carousel-thumbnails .thumbnail");
+// aggiungo la classe active alla prima immagine
+thumbnailElements[index].classList.add("active")
+
+
+
+downArrowElement.addEventListener("click", function () {
+
+  //   ° aumentare il valore dell'indice di un'unità
+  index++;
+  // dotElements[index].classList.add("active");
+  
+  // metodo non funzionante
+  if (index > 4) {
+    index = 0;
+  }
+
+  //   ° mostrare l'immagine alla posizione dell'array relativa al valore dell'indice
+  activeImgElement.src = images[index].image;
+
+  console.log(index)
+
+
+  // aggiungiamo la classe active al pallino corrispondente all'indice
+  // dotElements[index - 1].classList.remove("active");
+
+});
+
+
+upArrowElement.addEventListener("click", function () {
+  //   ° diminuire il valore dell'indice di un'unità
+  index--;
+  // dotElements[index].classList.add("active");
+  if (index < 0) {
+    index = 4;
+  }
+
+  //   ° mostrare l'immagine alla posizione dell'array relativa al valore dell'indice
+  activeImgElement.src = images[index].image;
+
+  console.log(index)
+
+  // aggiungiamo la classe active al pallino corrispondente all'indice
+  // dotElements[index + 1].classList.remove("active");
+
+});
