@@ -48,7 +48,6 @@ const images = [
 
 // console.log(images);
 
-
 //prendo gli elementi html
 const upArrowElement = document.getElementById("up-arrow");
 const downArrowElement = document.getElementById("down-arrow");
@@ -56,7 +55,9 @@ const activeImgElement = document.getElementById("carousel-active-img");
 const carouselThumbnailsElement = document.getElementById("carousel-thumbnails");
 const carouselTitleElement = document.getElementById("carousel-title");
 const carouselTextElement = document.getElementById("carousel-text");
-
+const startBtnEl = document.getElementById("start-btn");
+const stopBtnEl = document.getElementById("stop-btn");
+const reverseBtnEl = document.getElementById("reverse-btn");
 
 //memorizzo una variabile di indice
 let index = 0;
@@ -119,6 +120,41 @@ upArrowElement.addEventListener("click", () => {
 
 // chiamo la funzione scrollDown ogni 3 secondi
 let countdown = setInterval(scrollDown, 3000);
+
+
+//BONUS 3:
+// Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
+
+//funzionante
+startBtnEl.addEventListener("click", () => {
+
+let countdown = setInterval(scrollDown, 3000);
+
+});
+
+
+//parzialmente funzionante (funziona solo al primo click). Probabile problema con la function dell'eventlistener
+stopBtnEl.addEventListener("click", function() {
+
+  stopTimer(countdown);
+
+  console.log(countdown)
+
+});
+
+// altro tentativo non funzionante
+//stopBtnEl.addEventListener("click", stopTimer(countdown));
+
+
+//non funzionante
+reverseBtnEl.addEventListener("click", () => {
+
+  stopTimer(countdown);
+
+  // if (countdown = ???)
+  // let countdown = setInterval(scrollUp, 3000);
+
+});
 
 
 //___________________________________________________________________________
@@ -188,4 +224,9 @@ function scrollUp() {
 
   console.log(index);
 
+}
+
+
+function stopTimer(timerFunction) {
+  clearInterval(timerFunction);
 }
