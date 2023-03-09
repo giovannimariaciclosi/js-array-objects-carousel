@@ -104,3 +104,25 @@
   border: 3px solid white;
 
 }
+
+#carousel-title {
+  position: absolute;
+  top: 70%;
+  right: 26%;
+
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#carousel-text {
+  position: absolute;
+  top: 80%;
+  right: 26%;
+
+  max-width: 580px;
+
+  text-align: right;
+  color: white;
+  font-size: 1em;
+}

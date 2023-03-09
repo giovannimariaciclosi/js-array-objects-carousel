@@ -55,6 +55,7 @@ const downArrowElement = document.getElementById("down-arrow");
 const activeImgElement = document.getElementById("carousel-active-img");
 const carouselThumbnailsElement = document.getElementById("carousel-thumbnails");
 const carouselTitleElement = document.getElementById("carousel-title");
+const carouselTextElement = document.getElementById("carousel-text");
 
 
 //memorizzo una variabile di indice
@@ -83,8 +84,12 @@ images.forEach((immagineAttuale, indiceAttuale) => {
   // attribuire lo stile in maniera dinamica
   //stilizzo l'altezza di ciascuna con la formula calc(100% / numero immagini)
   newThumbnail.style.height = `calc(100% / ${images.length})`;
-});
 
+  // cambio il testo dell'elemento html #carousel-title
+  carouselTitleElement.innerText = images[index].title;
+  // cambio il testo dell'elemento html #carousel-text
+  carouselTextElement.innerText = images[index].text;
+});
 
 
 
@@ -119,8 +124,13 @@ downArrowElement.addEventListener("click", function () {
   //mostro la proprietà immagine dell'ogggetto alla posizione dell'array relativa al valore dell'indice
   activeImgElement.src = images[index].image;
 
-  console.log(index);
+  // cambio il testo dell'elemento html #carousel-title in base al valore dell'indice
+  carouselTitleElement.innerText = images[index].title;
+  // cambio il testo dell'elemento html #carousel-text in base al valore dell'indice
+  carouselTextElement.innerText = images[index].text;
 
+  console.log(index);
+  
 });
 
 //al click di upArrowElement
@@ -147,6 +157,11 @@ upArrowElement.addEventListener("click", function () {
 
   //mostro la proprietà immagine dell'ogggetto alla posizione dell'array relativa al valore dell'indice
   activeImgElement.src = images[index].image;
+
+  // cambio il testo dell'elemento html #carousel-title in base al valore dell'indice
+  carouselTitleElement.innerText = images[index].title;
+  // cambio il testo dell'elemento html #carousel-text in base al valore dell'indice
+  carouselTextElement.innerText = images[index].text;
 
   console.log(index);
 
