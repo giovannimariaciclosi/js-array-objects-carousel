@@ -46,23 +46,24 @@ const images = [
   }
 ]
 
-console.log(images);
+// console.log(images);
 
 
-// - preparare gli elementi in js corrispondenti agli elementi html
+//prendo gli elementi html
 const upArrowElement = document.getElementById("up-arrow");
 const downArrowElement = document.getElementById("down-arrow");
 const activeImgElement = document.getElementById("carousel-active-img");
 const carouselThumbnailsElement = document.getElementById("carousel-thumbnails");
+const carouselTitleElement = document.getElementById("carousel-title");
 
 
-// - memorizzare una variabile di indice
+//memorizzo una variabile di indice
 let index = 0;
 
-// inizio inserendo dentro il parametro src la proprietà image degli oggetti
+//inizio inserendo dentro il parametro src la proprietà image degli oggetti
 activeImgElement.src = images[index].image;
 
-
+//creo n miniature di immagine in base alla dimensione dell'array
 images.forEach((immagineAttuale, indiceAttuale) => {
 
   let newThumbnail = document.createElement('img');
@@ -90,47 +91,63 @@ images.forEach((immagineAttuale, indiceAttuale) => {
 // prendo le immagini create dal documento usando il selettore con la classe che gli ho appena aggiunto
 const thumbnailElements = document.querySelectorAll("#carousel-thumbnails .thumbnail");
 // aggiungo la classe active alla prima immagine
-thumbnailElements[index].classList.add("active")
+thumbnailElements[index].classList.add("active");
 
 
-
+//al click di downArrowElement
 downArrowElement.addEventListener("click", function () {
 
-  //   ° aumentare il valore dell'indice di un'unità
-  index++;
-  // dotElements[index].classList.add("active");
-  
-  // metodo non funzionante
-  if (index > 4) {
+  // rimuovo la classe active dall'immagine con l'indice attuale (non ancora aumentato)
+  thumbnailElements[index].classList.remove("active");
+
+  //SE l'indice è lunghezza dell'array - 1
+  if(index == images.length - 1) {
+
+    //cambio l'indice con lo 0
     index = 0;
+  
+  } else {
+  
+    //aumento il valore dell'indice di un'unità
+    index++;
+
   }
 
-  //   ° mostrare l'immagine alla posizione dell'array relativa al valore dell'indice
+  // aggiungo la classe active all'immagine miniatura relativa alla posizione dell'indice
+  thumbnailElements[index].classList.add("active");
+
+  //mostro la proprietà immagine dell'ogggetto alla posizione dell'array relativa al valore dell'indice
   activeImgElement.src = images[index].image;
 
-  console.log(index)
-
-
-  // aggiungiamo la classe active al pallino corrispondente all'indice
-  // dotElements[index - 1].classList.remove("active");
+  console.log(index);
 
 });
 
-
+//al click di upArrowElement
 upArrowElement.addEventListener("click", function () {
-  //   ° diminuire il valore dell'indice di un'unità
-  index--;
-  // dotElements[index].classList.add("active");
-  if (index < 0) {
-    index = 4;
+
+  // rimuovo la classe active dall'immagine con l'indice attuale (non ancora aumentato)
+  thumbnailElements[index].classList.remove("active");
+
+   //SE l'indice è 0
+   if(index == 0) {
+
+    //cambio l'indice con la lunghezza dell'array - 1
+    index = images.length - 1;
+
+  } else {
+
+    //diminuisco il valore dell'indice di un'unità
+    index--;
+
   }
 
-  //   ° mostrare l'immagine alla posizione dell'array relativa al valore dell'indice
+  //aggiungo la classe active all'immagine miniatura relativa alla posizione dell'indice
+  thumbnailElements[index].classList.add("active");
+
+  //mostro la proprietà immagine dell'ogggetto alla posizione dell'array relativa al valore dell'indice
   activeImgElement.src = images[index].image;
 
-  console.log(index)
-
-  // aggiungiamo la classe active al pallino corrispondente all'indice
-  // dotElements[index + 1].classList.remove("active");
+  console.log(index);
 
 });
