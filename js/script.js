@@ -100,41 +100,64 @@ thumbnailElements[index].classList.add("active");
 
 
 //al click di downArrowElement
-downArrowElement.addEventListener("click", function () {
+downArrowElement.addEventListener("click", () => {
 
-  // rimuovo la classe active dall'immagine con l'indice attuale (non ancora aumentato)
-  thumbnailElements[index].classList.remove("active");
+  let scroll = scrollDown();
 
-  //SE l'indice è lunghezza dell'array - 1
-  if(index == images.length - 1) {
-
-    //cambio l'indice con lo 0
-    index = 0;
-  
-  } else {
-  
-    //aumento il valore dell'indice di un'unità
-    index++;
-
-  }
-
-  // aggiungo la classe active all'immagine miniatura relativa alla posizione dell'indice
-  thumbnailElements[index].classList.add("active");
-
-  //mostro la proprietà immagine dell'ogggetto alla posizione dell'array relativa al valore dell'indice
-  activeImgElement.src = images[index].image;
-
-  // cambio il testo dell'elemento html #carousel-title in base al valore dell'indice
-  carouselTitleElement.innerText = images[index].title;
-  // cambio il testo dell'elemento html #carousel-text in base al valore dell'indice
-  carouselTextElement.innerText = images[index].text;
-
-  console.log(index);
-  
 });
 
 //al click di upArrowElement
-upArrowElement.addEventListener("click", function () {
+upArrowElement.addEventListener("click", () => {
+
+  let scroll = scrollUp();
+
+});
+
+
+// BONUS 2:
+// Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
+
+// chiamo la funzione scrollDown ogni 3 secondi
+let countdown = setInterval(scrollDown, 3000);
+
+
+//___________________________________________________________________________
+//FUNZIONI
+
+function scrollDown() {
+    
+// rimuovo la classe active dall'immagine con l'indice attuale (non ancora aumentato)
+thumbnailElements[index].classList.remove("active");
+
+//SE l'indice è lunghezza dell'array - 1
+if(index == images.length - 1) {
+
+  //cambio l'indice con lo 0
+  index = 0;
+
+} else {
+
+  //aumento il valore dell'indice di un'unità
+  index++;
+
+}
+// aggiungo la classe active all'immagine miniatura relativa alla posizione dell'indice
+thumbnailElements[index].classList.add("active");
+
+//mostro la proprietà immagine dell'ogggetto alla posizione dell'array relativa al valore dell'indice
+activeImgElement.src = images[index].image;
+
+// cambio il testo dell'elemento html #carousel-title in base al valore dell'indice
+carouselTitleElement.innerText = images[index].title;
+// cambio il testo dell'elemento html #carousel-text in base al valore dell'indice
+carouselTextElement.innerText = images[index].text;
+
+console.log(index);
+
+}
+
+
+function scrollUp() {
 
   // rimuovo la classe active dall'immagine con l'indice attuale (non ancora aumentato)
   thumbnailElements[index].classList.remove("active");
@@ -165,4 +188,4 @@ upArrowElement.addEventListener("click", function () {
 
   console.log(index);
 
-});
+}
